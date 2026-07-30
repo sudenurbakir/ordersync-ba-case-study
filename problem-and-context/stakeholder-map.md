@@ -16,7 +16,7 @@
 
 ## 2. Paydaş Analizi Özeti
 
-### Yüksek Etki + Yüksek İlgi (Key Players)
+### Yüksek Etki + Yüksek İlgi 
 - E-ticaret Satıcısı (İşletme Sahibi)
 - Operasyon Sorumlusu
 
@@ -33,7 +33,7 @@ Bu iki paydaş projenin başarısı için kritik öneme sahiptir.
 
 ---
 
-## 3. Paydaş Beklentileri (Özet)
+## 3. Paydaş Beklentileri
 
 | Paydaş | Temel Beklenti |
 |--------|----------------|
@@ -45,7 +45,7 @@ Bu iki paydaş projenin başarısı için kritik öneme sahiptir.
 
 ---
 
-## 4. İletişim Yaklaşımı (Basit)
+## 4. İletişim Yaklaşımı
 
 - İşletme Sahibi → Haftalık özet + karar toplantıları
 - Operasyon & Depo → Süreç ve ekran bazlı görüşmeler
