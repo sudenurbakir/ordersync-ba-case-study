@@ -47,13 +47,12 @@ OrderSync’te overselling önleme yaklaşımı şudur:
 
 ### 4.2. Temel Kural
 
-```text
 EĞER satılabilir_stok >= istenen_adet  İSE
     stok düşülür
     sipariş onaylanır
 DEĞİLSE
     işlem engellenir veya kullanıcı uyarılır
-
+    
 ### 4.3. MVP’de Yapılacaklar
 
 - Sipariş onayından önce stok kontrolü
@@ -92,10 +91,10 @@ Aynı anda birden fazla kanaldan gelen siparişlerde çakışma riski azalır.
 
 ---
 
-**## 6. Ek Önlemler
-**
-**### 6.1. Güvenlik Stoğu (Safety Stock)
-**
+## 6. Ek Önlemler
+
+### 6.1. Güvenlik Stoğu (Safety Stock)
+
 Gerçek stokun tamamı satışa açılmaz.
 
 **Örnek:**
@@ -105,15 +104,15 @@ Gerçek stokun tamamı satışa açılmaz.
 
 Bu yöntem; sayım farkı, hasar, gecikmeli iade gibi durumlara karşı tampon oluşturur.
 
-**### 6.2. Kritik Stok Uyarısı
-**
+### 6.2. Kritik Stok Uyarısı
+
 Stok belirlenen seviyenin altına düştüğünde sistem uyarı üretir.  
 Bu doğrudan overselling’i engellemez ama riski erken gösterir.
 
 ---
 
-**## 7. İade ve İptalin Etkisi
-**
+## 7. İade ve İptalin Etkisi
+
 Overselling sadece satış anında oluşmaz.
 
 - İptal edilen siparişin stoğu geç geri eklenirse
@@ -127,8 +126,8 @@ Bu yüzden:
 
 ---
 
-**## 8. Başarı Kriteri
-**
+## 8. Başarı Kriteri
+
 Overselling önleme özelliği başarılı sayılır eğer:
 
 1. Stok yetersizken yapılan satışlar belirgin şekilde azalır
@@ -138,8 +137,8 @@ Overselling önleme özelliği başarılı sayılır eğer:
 
 ---
 
-**## 9. Uygulama Notu
-**
+## 9. Uygulama Notu
+
 - Overselling’i %100 bitirmek zordur, özellikle çok kanallı ve yarı manuel ortamlarda.
 - Hedef: riski kontrol altına almak ve belirgin şekilde azaltmak.
 - Stok verisi kalitesizse hiçbir algoritma yeterli olmaz.
@@ -155,4 +154,3 @@ OrderSync’te overselling önleme stratejisi:
 2. **Sonraki aşama:** Rezervasyon modeli
 3. **Destekleyici:** Güvenlik stoğu + kritik stok uyarısı
 4. **Süreç:** İptal ve iade ile stok iadesinin hızlı yapılması
-
