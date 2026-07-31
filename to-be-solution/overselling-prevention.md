@@ -54,87 +54,105 @@ EĞER satılabilir_stok >= istenen_adet  İSE
 DEĞİLSE
     işlem engellenir veya kullanıcı uyarılır
 
-4.3. MVP’de Yapılacaklar
+### 4.3. MVP’de Yapılacaklar
 
-Sipariş onayından önce stok kontrolü
-Yetersiz stokta uyarı / engelleme
-Onay sonrası stok düşümü
-İptal ve iade sonrası stok iadesi
+- Sipariş onayından önce stok kontrolü
+- Yetersiz stokta uyarı / engelleme
+- Onay sonrası stok düşümü
+- İptal ve iade sonrası stok iadesi
 
-4.4. MVP’de Yapılmayacaklar
+### 4.4. MVP’de Yapılmayacaklar
 
-Gelişmiş rezervasyon motoru
-Kanal bazlı stok ayırma
-Gerçek zamanlı pazaryeri stok senkronu
-Karmaşık tahminleme algoritmaları
+- Gelişmiş rezervasyon motoru
+- Kanal bazlı stok ayırma
+- Gerçek zamanlı pazaryeri stok senkronu
+- Karmaşık tahminleme algoritmaları
 
+---
 
-5. Gelişmiş Yaklaşım: Rezervasyon (Soft Reservation)
+## 5. Gelişmiş Yaklaşım: Rezervasyon (Soft Reservation)
+
 İlerleyen versiyonlarda daha güvenli model kullanılabilir.
-5.1. Stok Alanları
 
-toplam_stok
-rezerve_stok
-satilabilir_stok = toplam_stok - rezerve_stok
+### 5.1. Stok Alanları
 
-5.2. Akış
+- `toplam_stok`
+- `rezerve_stok`
+- `satilabilir_stok = toplam_stok - rezerve_stok`
 
-Sipariş geldiğinde stok rezerve edilir
-Sipariş kesinleşince rezervasyon kalıcı düşüme çevrilir
-Sipariş iptal edilirse rezervasyon serbest bırakılır
+### 5.2. Akış
 
-5.3. Avantajı
+1. Sipariş geldiğinde stok **rezerve** edilir
+2. Sipariş kesinleşince rezervasyon **kalıcı düşüme** çevrilir
+3. Sipariş iptal edilirse rezervasyon **serbest bırakılır**
+
+### 5.3. Avantajı
+
 Aynı anda birden fazla kanaldan gelen siparişlerde çakışma riski azalır.
 
-6. Ek Önlemler
-6.1. Güvenlik Stoğu (Safety Stock)
-Gerçek stokun tamamı satışa açılmaz.
-Örnek:
+---
 
-Gerçek stok: 20
-Güvenlik stoğu: 2
-Satılabilir stok: 18
+**## 6. Ek Önlemler
+**
+**### 6.1. Güvenlik Stoğu (Safety Stock)
+**
+Gerçek stokun tamamı satışa açılmaz.
+
+**Örnek:**
+- Gerçek stok: 20
+- Güvenlik stoğu: 2
+- Satılabilir stok: 18
 
 Bu yöntem; sayım farkı, hasar, gecikmeli iade gibi durumlara karşı tampon oluşturur.
 
-6.2. Kritik Stok Uyarısı
-Stok belirlenen seviyenin altına düştüğünde sistem uyarı üretir.
+**### 6.2. Kritik Stok Uyarısı
+**
+Stok belirlenen seviyenin altına düştüğünde sistem uyarı üretir.  
 Bu doğrudan overselling’i engellemez ama riski erken gösterir.
 
-7. İade ve İptalin Etkisi
+---
+
+**## 7. İade ve İptalin Etkisi
+**
 Overselling sadece satış anında oluşmaz.
 
-İptal edilen siparişin stoğu geç geri eklenirse
-İade ürün stoğa geç yansırsa
+- İptal edilen siparişin stoğu geç geri eklenirse
+- İade ürün stoğa geç yansırsa
 
 yeni satışlar yanlış stok bilgisiyle yapılabilir.
+
 Bu yüzden:
+- İptal → stok iadesi hızlı olmalı
+- İade → ürün depoya girince stok güncellenmeli
 
-İptal → stok iadesi hızlı olmalı
-İade → ürün depoya girince stok güncellenmeli
+---
 
-
-8. Başarı Kriteri
+**## 8. Başarı Kriteri
+**
 Overselling önleme özelliği başarılı sayılır eğer:
 
-Stok yetersizken yapılan satışlar belirgin şekilde azalır
-Operasyon ekibi stok çakışmalarını daha az yaşar
-Sistem, kritik anlarda uyarı veya engelleme yapabilir
-İptal/iade sonrası stok güncellemesi aksatılmadan ilerler
+1. Stok yetersizken yapılan satışlar belirgin şekilde azalır
+2. Operasyon ekibi stok çakışmalarını daha az yaşar
+3. Sistem, kritik anlarda uyarı veya engelleme yapabilir
+4. İptal/iade sonrası stok güncellemesi aksatılmadan ilerler
 
+---
 
-9. Uygulama Notu
+**## 9. Uygulama Notu
+**
+- Overselling’i %100 bitirmek zordur, özellikle çok kanallı ve yarı manuel ortamlarda.
+- Hedef: riski kontrol altına almak ve belirgin şekilde azaltmak.
+- Stok verisi kalitesizse hiçbir algoritma yeterli olmaz.
+- Bu yüzden stok giriş/güncelleme disiplini de çözümün parçasıdır.
 
-Overselling’i %100 bitirmek zordur, özellikle çok kanallı ve yarı manuel ortamlarda.
-Hedef: riski kontrol altına almak ve belirgin şekilde azaltmak.
-Stok verisi kalitesizse hiçbir algoritma yeterli olmaz.
-Bu yüzden stok giriş/güncelleme disiplini de çözümün parçasıdır.
+---
 
+## 10. Özet
 
-10. Özet
 OrderSync’te overselling önleme stratejisi:
 
-MVP: Onay anında stok kontrolü + düşüm
-Sonraki aşama: Rezervasyon modeli
-Destekleyici: Güvenlik stoğu + kritik stok uyarısı
-Süreç: İptal ve iade ile stok iadesinin hızlı yapılması
+1. **MVP:** Onay anında stok kontrolü + düşüm
+2. **Sonraki aşama:** Rezervasyon modeli
+3. **Destekleyici:** Güvenlik stoğu + kritik stok uyarısı
+4. **Süreç:** İptal ve iade ile stok iadesinin hızlı yapılması
+
